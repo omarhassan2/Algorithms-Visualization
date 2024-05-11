@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ca6a16e-7020-4a9b-8c03-1f7651beb7af" name="Changes" comment="added plotting the algorithm growth rate -Kasim">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="5ca6a16e-7020-4a9b-8c03-1f7651beb7af" name="Changes" comment="small change -Kasim">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ControlPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ControlPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
@@ -60,10 +59,12 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "TODO_SCOPE": "All Places",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/College/CSE_2_Term__2/Algorithms/Project/Algorithms-Visualization",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -112,9 +113,15 @@
       <workItem from="1714640432665" duration="7413000" />
       <workItem from="1715177283770" duration="115000" />
       <workItem from="1715177421492" duration="1209000" />
-      <workItem from="1715201573474" duration="411000" />
-      <workItem from="1715202449464" duration="25000" />
-      <workItem from="1715207113015" duration="5871000" />
+      <workItem from="1715199944104" duration="118000" />
+      <workItem from="1715200561140" duration="722000" />
+      <workItem from="1715271805700" duration="86000" />
+      <workItem from="1715351224815" duration="2904000" />
+      <workItem from="1715369847583" duration="327000" />
+      <workItem from="1715375675964" duration="1095000" />
+      <workItem from="1715385424785" duration="34000" />
+      <workItem from="1715385479128" duration="10000" />
+      <workItem from="1715385495163" duration="441000" />
     </task>
     <task id="LOCAL-00001" summary="change colors">
       <option name="closed" value="true" />
@@ -139,7 +146,28 @@
       <option name="project" value="LOCAL" />
       <updated>1714641831949</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="enhanced the sample sizes and the plot shapes and consistencies -Kasim">
+      <created>1715199296085</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1715199296087</updated>
+    </task>
+    <task id="LOCAL-00005" summary="small change -Kasim">
+      <created>1715200699989</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1715200699989</updated>
+    </task>
+    <task id="LOCAL-00006" summary="small change -Kasim">
+      <created>1715201281312</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1715201281312</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,7 +188,9 @@
     <MESSAGE value="change colors" />
     <MESSAGE value="add message show time taken for sorting" />
     <MESSAGE value="added plotting the algorithm growth rate -Kasim" />
-    <option name="LAST_COMMIT_MESSAGE" value="added plotting the algorithm growth rate -Kasim" />
+    <MESSAGE value="enhanced the sample sizes and the plot shapes and consistencies -Kasim" />
+    <MESSAGE value="small change -Kasim" />
+    <option name="LAST_COMMIT_MESSAGE" value="small change -Kasim" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -169,11 +199,6 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/SortingVisualization.java</url>
-          <line>642</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

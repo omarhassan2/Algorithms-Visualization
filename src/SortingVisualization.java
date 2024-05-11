@@ -23,17 +23,17 @@ public class SortingVisualization extends JPanel {
 
     private static final int INIT_ARRAY_SIZE = 100;
     private static final int SPACING = 1;
-    private static final int WIDTH = 900;
-    private static final int HEIGHT = 450;
+    private static final int WIDTH = 1500;
+    private static final int HEIGHT = 500;
     private static int rectWidth = WIDTH / INIT_ARRAY_SIZE - SPACING;
     private static int delay = DEFAULT_DELAY;
 
 
-    private static final Color DEFUALT_COLOR = new Color(95, 137, 217);
+    private static final Color DEFUALT_COLOR = new Color(92, 142, 241);
     private static final Color SELECTED_COLOR = new Color(255, 0, 0);
+    public static final Color THEME_COLOR = Color.white;
     private static Thread sortingThread, plottingThread;
     private int[] sampleSizes = generateSeries(10, true, 2, 15);
-
 
 
     private final static ArrayList<Long> timeTakenInTest = new ArrayList<>();
@@ -44,7 +44,7 @@ public class SortingVisualization extends JPanel {
 
     public SortingVisualization() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        setBackground(Color.BLACK);
+        setBackground(THEME_COLOR);
         prepareArray(INIT_ARRAY_SIZE);
 
     }
@@ -109,12 +109,12 @@ public class SortingVisualization extends JPanel {
         double lastValue = initial;
         if (isGeometric) {
             for (int i = 0; i < size; i++) {
-                series[i] = (int)lastValue;
+                series[i] = (int) lastValue;
                 lastValue = lastValue * factor;
             }
         } else {
             for (int i = 0; i < size; i++) {
-                series[i] = (int)(initial + i * factor);
+                series[i] = (int) (initial + i * factor);
             }
         }
         printArray(series);
@@ -140,14 +140,13 @@ public class SortingVisualization extends JPanel {
     /**
      * this method starts the algorithm
      *
-     * @param algorithm the algorithm to be run
-     * @param isPlottingGrowthRate      if the algorithm is to be tested
+     * @param algorithm            the algorithm to be run
+     * @param isPlottingGrowthRate if the algorithm is to be tested
      */
     public void start(String algorithm, boolean isPlottingGrowthRate) {
         fineTuneDelay(algorithm, isPlottingGrowthRate);
         fineTuneSampleSize(algorithm, isPlottingGrowthRate);
         if (isPlottingGrowthRate) {
-            prepareArray(sampleSizes[0]);
             runFor(runTestFor(), algorithm);
         } else {
             runFor(1, algorithm);
@@ -155,29 +154,30 @@ public class SortingVisualization extends JPanel {
 
 
     }
-    int runTestFor(){
+
+    int runTestFor() {
         return sampleSizes.length;
     }
 
-    void fineTuneDelay(String algorithm, boolean isPlottingGrowthRate){
-       if(isPlottingGrowthRate){
-           if(algorithm.equals("Linear Search") || algorithm.equals("Binary Search")){
-               setDelay(PLOTTING_SEARCH_DELAY);
-           }else {
-               setDelay(PLOTTING_SORTING_DELAY);
-           }
-       }else{
-           setDelay(ControlPanel.delaySlider.getValue());
-           if (algorithm.equals(("Linear Search")) || algorithm.equals("Binary Search"))
-               setDelay(SEARCH_DELAY);
+    void fineTuneDelay(String algorithm, boolean isPlottingGrowthRate) {
+        if (isPlottingGrowthRate) {
+            if (algorithm.equals("Linear Search") || algorithm.equals("Binary Search")) {
+                setDelay(PLOTTING_SEARCH_DELAY);
+            } else {
+                setDelay(PLOTTING_SORTING_DELAY);
+            }
+        } else {
+            setDelay(ControlPanel.delaySlider.getValue());
+            if (algorithm.equals(("Linear Search")) || algorithm.equals("Binary Search"))
+                setDelay(SEARCH_DELAY);
 
-       }
+        }
 
     }
 
-    void fineTuneSampleSize(String algorithm, boolean isPlottingGrowthRate){
-        if(isPlottingGrowthRate){
-            switch (algorithm){
+    void fineTuneSampleSize(String algorithm, boolean isPlottingGrowthRate) {
+        if (isPlottingGrowthRate) {
+            switch (algorithm) {
                 case "Bubble Sort":
                 case "Selection Sort":
                 case "Insertion Sort":
@@ -188,7 +188,7 @@ public class SortingVisualization extends JPanel {
                     sampleSizes = generateSeries(100, false, 128, 45);
                     break;
                 case "Linear Search":
-                    sampleSizes = generateSeries(100, false,2 , 30);
+                    sampleSizes = generateSeries(100, false, 2, 30);
                     break;
                 case "Binary Search":
                     sampleSizes = generateSeries(100, false, 1024, 60);
@@ -197,6 +197,8 @@ public class SortingVisualization extends JPanel {
                     throw new IllegalArgumentException("Invalid sorting algorithm");
             }
             prepareArray(sampleSizes[0]);
+        } else {
+            prepareArray(INIT_ARRAY_SIZE);
         }
     }
 
@@ -262,7 +264,8 @@ public class SortingVisualization extends JPanel {
                         e.fillInStackTrace();
                     }
 
-                    rectWidth = rectWidth == 1 ? rectWidth : rectWidth / 2;
+                    //rectWidth = rectWidth == 1 ? rectWidth : rectWidth / 2;
+                    setOptimalRectWidth();
                     if (Thread.currentThread().getId() != plottingThread.getId()) {
                         return;
                     }
@@ -344,7 +347,7 @@ public class SortingVisualization extends JPanel {
         dataset.addSeries(actualRuntime);
 
         // Second series
-        XYSeries theoreticalRuntime ;
+        XYSeries theoreticalRuntime;
         // Populate the second series with data
         // For now let's hard code it to merge sort (nlogn)
 
@@ -361,21 +364,21 @@ public class SortingVisualization extends JPanel {
                 break;
             case "Merge Sort":
             case "Quick Sort":
-                    theoreticalRuntime = new XYSeries(algorithm + " Algorithm Theoretical Runtime " + "(nlogn)");
+                theoreticalRuntime = new XYSeries(algorithm + " Algorithm Theoretical Runtime " + "(nlogn)");
                 for (int j : x) {
                     double proportion = timeAverage / average(x, "nlogn");
                     theoreticalRuntime.add(j, (int) (proportion * j * Math.log(j)));
                 }
                 break;
             case "Linear Search":
-                    theoreticalRuntime = new XYSeries(algorithm + " Algorithm Theoretical Runtime " + "(n)");
+                theoreticalRuntime = new XYSeries(algorithm + " Algorithm Theoretical Runtime " + "(n)");
                 for (int j : x) {
                     double proportion = timeAverage / average(x, "n");
                     theoreticalRuntime.add(j, (int) (proportion * j));
                 }
                 break;
             case "Binary Search":
-                    theoreticalRuntime = new XYSeries(algorithm + " Algorithm Theoretical Runtime " + "(logn)");
+                theoreticalRuntime = new XYSeries(algorithm + " Algorithm Theoretical Runtime " + "(logn)");
                 for (int j : x) {
                     double proportion = timeAverage / average(x, "logn");
                     theoreticalRuntime.add(j, (int) (proportion * Math.log(j)));
@@ -387,7 +390,7 @@ public class SortingVisualization extends JPanel {
 
 
         dataset.addSeries(theoreticalRuntime);
-        
+
         // Create a chart
         JFreeChart chart = ChartFactory.createXYLineChart(
                 "Size VS. Time Plot", // Chart title
@@ -489,7 +492,8 @@ public class SortingVisualization extends JPanel {
                 repaint();
                 pause();
             }
-        }catch (ArrayIndexOutOfBoundsException ignored){
+        } catch (ArrayIndexOutOfBoundsException ignored) {
+
         }
     }
 
@@ -517,10 +521,15 @@ public class SortingVisualization extends JPanel {
                 rectLabelMap.get(array[j]).color = SELECTED_COLOR;
                 repaint();
                 if (array[j] < array[minIndex]) {
+                    if (i != minIndex)
+                        rectLabelMap.get(array[minIndex]).color = DEFUALT_COLOR;
                     minIndex = j;
+                    rectLabelMap.get(array[minIndex]).color = Color.yellow;
+                    repaint();
                 }
                 pause();
-                rectLabelMap.get(array[j]).color = DEFUALT_COLOR;
+                if (j != minIndex)
+                    rectLabelMap.get(array[j]).color = DEFUALT_COLOR;
                 repaint();
             }
             swap(i, minIndex);
@@ -529,10 +538,12 @@ public class SortingVisualization extends JPanel {
             rectLabelMap.get(array[minIndex]).color = DEFUALT_COLOR;
         }
         paintSortedColor(size);
+
     }
 
 
     public void insertionSort(int size) {
+
         for (int i = 1; i < size; i++) {
             double key = array[i];
             int j = i - 1;
@@ -550,6 +561,7 @@ public class SortingVisualization extends JPanel {
             repaint();
         }
         paintSortedColor(size);
+
     }
 
     public void mergeSort(int size) {
@@ -639,6 +651,7 @@ public class SortingVisualization extends JPanel {
             quickSort(pi + 1, high);
         }
     }
+
     private int partition(int low, int high) {
         double pivot = array[high];
         rectLabelMap.get(array[high]).color = Color.yellow;
